@@ -1,0 +1,62 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-light" style="background-color: rgb(161, 9, 175)">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'polls:index' %}">
+        <b><span style="color:black">Сервис прохождения опросов</span></b>
+      </a>
+      {% with request.resolver_match.view_name as view_name %}
+      <ul class="nav nav-pills">
+        {% if user.is_authenticated %}
+        <li class="nav-item" > 
+          <a class="nav-link link-light {% if view_name  == 'polls:profile'%}active{% endif %}" 
+            href="{% url 'polls:profile' user.username %}"
+          >
+            Профиль пользователя
+          </a>
+        </li>
+        <li class="nav-item" > 
+          <a class="nav-link link-light {% if view_name  == 'polls:all_users'%}active{% endif %}" 
+            href="{% url 'polls:all_users' %}"
+          >
+            Рейтинг пользователей
+          </a>
+        </li>
+        <li class="nav-item" > 
+          <a class="nav-link link-light {% if view_name  == 'users:password_change' %}active{% endif %}" 
+            href="{% url 'users:password_change' %}"
+          >
+            Изменить пароль
+          </a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-light {% if view_name  == 'users:logout' %}active{% endif %}" 
+            href="{% url 'users:logout' %}"
+          >
+            Выйти
+          </a>
+        </li>
+        <li>
+          Пользователь: {{ user.username }}
+        <li>
+        {% else %}
+        <li class="nav-item"> 
+          <a class="nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}" 
+            href="{% url 'users:login' %}"
+          >
+            Войти
+          </a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-light {% if view_name  == 'users:signup' %}active{% endif %}" 
+            href="{% url 'users:signup' %}"
+          >
+            Регистрация
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endwith %}
+    </div>
+  </nav>      
+</header> 

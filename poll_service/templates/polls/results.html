@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Результаты опроса 
+{% endblock %}
+
+{% block content %}
+<h3 class ="mb-5 text-center">{{ question.title }}</h3>
+<div class="container"> 
+  <h4>Результаты опроса: </h4>
+  <ul class ="list-group mb-5">
+      {% load rupluralize %}
+      {% for answ in question.answer_set.all %}
+      <li>{{ answ.answer }} -- {{ answ.vote }} {{ answ.vote|pluralize:"голос,голоса,голосов" }}</li>
+      {% endfor %}
+  </ul> 
+<a class ="btn btn-secondary btn-sm" href ="{% url 'polls:index' %}">Вернуться к списку вопросов</a>
+</div>
+{% endblock %}

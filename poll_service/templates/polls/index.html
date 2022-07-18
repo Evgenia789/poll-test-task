@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Вопросы{% endblock %}
+
+{% block content %}
+
+<div class="container">        
+  <h4>Вопросы</h4>
+  {% for poll in page_obj %}
+    <article>
+      <p>{{ poll.title }}
+        <a href="{% url 'polls:question_detail' poll.id %}">перейти к вопросу</a>
+      </p>
+    </article> 
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %} 
+  {% include 'polls/includes/paginator.html' %}
+</div>
+{% endblock %}

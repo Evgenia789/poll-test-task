@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Рейтинг пользователей 
+{% endblock %}
+
+{% block content %}
+<h3 class ="mb-5 text-center">Рейтинг пользователей</h3>
+<div class="container"> 
+  <ul class ="list-group">
+      {% load rupluralize %}
+      {% for user in users %}
+        <li class="list-group-item list-group-item-{{user.color}}">Пользователь: {{ user.user }} ответил на {{ user.count_answer }} {{ user.count_answer|pluralize:"вопрос,вопроса,вопросов" }}</li>
+      {% endfor %}
+  </ul> 
+<pre> </pre>
+<a class ="btn btn-secondary btn-sm" href ="{% url 'polls:index' %}">Вернуться к списку вопросов</a>
+</div>
+
+{% endblock %}
